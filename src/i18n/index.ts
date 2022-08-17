@@ -1,12 +1,12 @@
 import { createI18n } from 'vue-i18n';
 import zh from './zh';
 import en from './en';
-import { useLocaleStore } from '@/store/modules/locale';
-const localeStore = useLocaleStore()
+import { getStorageValue } from '@/utils/storage'
+import _ from 'lodash';
 
-console.log('localeStore',localeStore);
+const curSystemLang = getStorageValue('local', 'curSystemLang')
 const i18n = createI18n({
-  locale: localeStore.getLocale,
+  locale: _.isNull(curSystemLang) ? 'zh' : curSystemLang,
   fallbackLocale: 'en',
   messages: {
     zh,
